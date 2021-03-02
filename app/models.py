@@ -35,5 +35,28 @@ class Role(db.Model):
     
     def __repr__(self):
         return f'User {self.name}'
+
+class Pitch:
     
+    all_pitches = []
     
+    def __init__(self,pitch,author,pitch_category):
+        self.pitch = pitch
+        self.author = author
+        self.pitch_category = pitch_category
+        
+    def save_pitch(self):
+        Pitch.all_pitches.append(self)
+        
+    @classmethod
+    def clear_pitches(cls):
+        Pitch.all_pitches.clear()
+    @classmethod
+    def get_pitches(cls):
+        
+        response = []
+        
+        for pitch in cls.all_pitches:
+            response.append(pitch)
+            
+        return response
