@@ -5,10 +5,16 @@
 <div class="container">
     <div class="col-md-8">
         <h1>Pitches</h1>
-        <ul>
-            {{ pitches }}
-        </ul>
-
+        {% for pitch in pitches %}
+        <figure class="text-end">
+            <blockquote class="blockquote">
+              <p>{{pitch.pitch}}</p>
+            </blockquote>
+            <figcaption class="blockquote-footer">
+              Written by: {{pitch.author}} <cite title="Source Title"> Category: {{pitch.category}}</cite>
+            </figcaption>
+          </figure>
+        {% endfor %}
     </div>
     <div class="col-md-4">
         <a class="ratings" href="/pitch/new/weee"> Write a new pitch</a>

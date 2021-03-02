@@ -18,25 +18,27 @@ def index():
     title = 'Welcome to the first ever Pitch 4 Pitch app!'
     return render_template('index.html',title = title)
 
-@main.route('/pitch/<pitch_category>')
-def pitch(pitch_category):
+@main.route('/pitch/<category>')
+def pitch(category):
     '''
     View pitch page function that returns the pitches and the data
     '''
     pitches = Pitch.get_pitches()
     
     return render_template('pitch.html',pitches = pitches)
+
 @main.route('/pitch/new/<category>', methods = ['GET','POST'])
+@login_required
 def new_pitch(category):
     form = PitchForm()
     
     if form.validate_on_submit():
         pitch = form.pitch.data
         author = form.author.data
-        pitch_category = form.pitch_category.data
-        new_pitch = Pitch(pitch,author,pitch_category)
+        category = form.category.data
+        new_pitch = Pitch(pitch,author,category)
         
         new_pitch.save_pitch()
-        return redirect(url_for('pitch',category = pitch.pitch_category))
+        #return redirect(url_for('pitch',category = pitch.category))
     
     return render_template('new_pitch.html',pitch_form = form)
