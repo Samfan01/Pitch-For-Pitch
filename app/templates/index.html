@@ -1,12 +1,32 @@
 
 {% extends 'bootstrap/base.html'%}
+{% block styles %}
+{{super()}}
+<link rel="stylesheet"
+      href="{{url_for('static', filename='css/index.css')}}">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap" rel="stylesheet">
+{% endblock %}
 <!-- Navbar block-->
 {% block navbar %}
     {% include 'navbar.html'%}
 {% endblock%}
 {% block content %}
 <div class="jumbotron">
-    <h1>Hey You</h1>
+    <h1 class="title" >Hey You</h1>
+    <h2 class="intro"> Your first impression in a 60 seconds pitch!! Welcome to Pitch for Pitch.</h2>
+
+</div>
+<div class="body">
+    <div class="row">
+        <div class="col-md-6" id="homepage" >
+            <h2 class="title1">How important it is.</h2>
+        </div>
+        <div class="col-md-6" id="homepage" >
+
+        </div>
+
+    </div>
 
 </div>
 
