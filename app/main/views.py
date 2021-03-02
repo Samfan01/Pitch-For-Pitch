@@ -13,3 +13,9 @@ def index():
     title = 'Welcome to the first ever Pitch 4 Pitch app!'
     return render_template('index.html',title = title)
 
+@main.route('/pitch/<pitch_category>')
+def pitch(<pitch_category>):
+    '''
+    View pitch page function that returns the pitches and the data
+    '''
+    return render_template('pitch.html',pitch = pitch_category)
