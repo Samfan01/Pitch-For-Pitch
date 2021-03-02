@@ -11,10 +11,14 @@
     font-family: 'Akaya Telivigala', cursive;
 }
 .body{
-    background-image: url(../images/bg-1.png);
+    background-image: url(../images/bg-2.jpeg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    margin-top: -30px;
+    color: whitesmoke;
+    font-size: large;
+    font-weight: bold;
 }
 .title1{
     text-align: center;
@@ -22,5 +26,12 @@
 
 }
 #homepage{
-    height: 100px;
+    height: 500px;
+}
+#footer{
+    background-color: black;
+    height: 200px;
+    text-align: center;
+    padding: 5px;
+  
 }
