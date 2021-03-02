@@ -10,5 +10,6 @@ def index():
     View root page function that returns the index page
     and its data
     '''
-    return render_template('index.html')
+    title = 'Welcome to the first ever Pitch 4 Pitch app!'
+    return render_template('index.html',title = title)
 
