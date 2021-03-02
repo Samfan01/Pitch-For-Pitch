@@ -1,3 +1,4 @@
+from flask_bootstrap import Bootstrap
 from flask import Blueprint
 main = Blueprint('main',__name__)
 from . import views,error
@@ -17,6 +18,7 @@ def create_app(config_name):
     bootstrap.init_app(app)
     db.init_app(app)
     login_manager.init_app(app)
+    bootstrap = Bootstrap(app)
     
     # Registering the blueprint
     from .main import main as main_blueprint
