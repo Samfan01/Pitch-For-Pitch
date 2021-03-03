@@ -2,6 +2,7 @@ from . import db
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin
 from . import login_manager
+from datetime import datetime
 
 
 @login_manager.user_loader
@@ -20,6 +21,7 @@ class User(UserMixin,db.Model):
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
     pass_secure = db.Column(db.String(255))
+    pitches = db.relationship('Pitch',backref = 'user',lazy = 'dynamic')
     
     @property
     def password(self):
@@ -48,27 +50,26 @@ class Role(db.Model):
     def __repr__(self):
         return f'User {self.name}'
 
-class Pitch:
+class Pitch(db.Model):
     
-    all_pitches = []
+    __tablename__ = 'pitches'
     
-    def __init__(self,pitch,author,category):
-        self.pitch = pitch
-        self.author = author
-        self.category = category
-        
+    id = db.Column(db.Integer,primary_key = True)
+    category =db.Column(db.String)
+    pitch = db.Column(db.String)
+    author = db.Column(db.String)
+    posted = db.Column(db.DateTime,default=datetime.utcnow)
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    
+    
     def save_pitch(self):
-        Pitch.all_pitches.append(self)
-        
+        db.session.add(self)
+        db.session.commit()
+    
     @classmethod
-    def clear_pitches(cls):
-        Pitch.all_pitches.clear()
-    @classmethod
-    def get_pitches(cls):
+    def get_pitches(cls,category):
+        pitches = Pitch.query.filter_by(category = category).all()
         
-        response = []
+        return pitches
         
-        for pitch in cls.all_pitches:
-            response.append(pitch)
-            
-        return response
+    

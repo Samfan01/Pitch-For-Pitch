@@ -2,7 +2,7 @@ from flask import render_template,request,redirect,url_for,abort
 from . import main
 from ..models import Pitch,User
 from .forms import PitchForm,UpdateProfile
-from flask_login import login_required
+from flask_login import login_required,current_user
 from .. import db,photos
 
 
@@ -24,7 +24,7 @@ def pitch(category):
     '''
     View pitch page function that returns the pitches and the data
     '''
-    pitches = Pitch.get_pitches()
+    pitches = Pitch.get_pitches(category)
     
     return render_template('pitch.html',pitches = pitches)
 
@@ -35,12 +35,13 @@ def new_pitch(category):
     
     if form.validate_on_submit():
         pitch = form.pitch.data
-        author = form.author.data
+        author = form.author.data 
         category = form.category.data
-        new_pitch = Pitch(pitch,author,category)
+        
+        new_pitch = Pitch(category=category,pitch=pitch,author=author,user=current_user)
         
         new_pitch.save_pitch()
-        #return redirect(url_for('pitch',category = pitch.category))
+        return redirect(url_for('.pitch',category = category))
     
     return render_template('new_pitch.html',pitch_form = form)
 
@@ -82,3 +83,11 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname = uname))
+
+@main.route('/business/category')
+def business():
+    
+    pitch = Pitch.query.filter_by(category = 'business').all()
+    
+    return render_template('business.html',pitches = pitch)
+    
