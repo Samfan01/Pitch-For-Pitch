@@ -19,24 +19,39 @@
             {%else%}
             <p> {{user.username| capitalize}} has no bio </p>
             {% endif %}
+
             {% if user == current_user %}
             <a href="{{url_for('main.update_profile',uname=user.username)}}">Edit profile</a>
             {% endif %}
         </div>
-
         <!--Display profile photo-->
         <div class="col-md-4">
 
-           
+
             {% if user == current_user %}
-            <form action="{{ url_for('main.update_pic',uname = user.username)}}" method="post" enctype="multipart/form-data">
+            <form action="{{ url_for('main.update_pic',uname = user.username)}}" method="post"
+                enctype="multipart/form-data">
 
                 <input type="file" name="photo" class="form-control" required>
 
                 <input type="submit">
 
             </form>
-            {% endif %}
+        </div>
+        {% endif %}
+        <div class="col-md-4">
+            <h1>Pitches</h1>
+            {% for pitch in pitches %}
+            <figure class="text-end">
+                <blockquote class="blockquote">
+                    <p>{{pitch.pitch}}</p>
+                </blockquote>
+                <figcaption class="blockquote-footer">
+                    Written by: {{pitch.author}} <cite title="Source Title"> Category: {{pitch.category}}</cite>
+                </figcaption>
+            </figure>
+            {% endfor %}
+
         </div>
     </div>
 </div>

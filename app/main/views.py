@@ -1,6 +1,6 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
-from ..models import Pitch,User
+from ..models import Pitch,User,Comment
 from .forms import PitchForm,UpdateProfile
 from flask_login import login_required,current_user
 from .. import db,photos
@@ -48,11 +48,12 @@ def new_pitch(category):
 @main.route('/user/<uname>')
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
+    pitch = Pitch.query.filter_by(user = current_user).all()
     
     if user is None:
         abort(404)
         
-    return render_template('profile/profile.html',user = user)
+    return render_template('profile/profile.html',user = user,pitches = pitch)
 
 @main.route('/user/<uname>/update',methods =['GET','POST'])
 @login_required
@@ -77,6 +78,7 @@ def update_profile(uname):
 @login_required
 def update_pic(uname):
     user = User.query.filter_by(username = uname).first()
+    
     if 'photo' in request.files:
         filename = photos.save(request.files['photo'])
         path = f'photos/{filename}'
@@ -84,45 +86,45 @@ def update_pic(uname):
         db.session.commit()
     return redirect(url_for('main.profile',uname = uname))
 
-@main.route('/business/category')
-def business():
+@main.route('/business/<category>')
+def business(category):
     
-    pitch = Pitch.query.filter_by(category = 'business').all()
+    pitch = Pitch.query.filter_by(category = 'Business').all()
     
     return render_template('business.html',pitches = pitch)
 
-@main.route('/spiritual/category')
-def spiritual():
+@main.route('/spiritual/<category>')
+def spiritual(category):
     
-    pitch = Pitch.query.filter_by(category = 'spiritual').all()
+    pitch = Pitch.query.filter_by(category = 'Spiritual').all()
     
     return render_template('spiritual.html',pitches = pitch)
 
-@main.route('/mood_lifting/category')
-def spiritual():
+@main.route('/mood_lifting/<category>')
+def mood_lifting(category):
     
-    pitch = Pitch.query.filter_by(category = 'mood_lifting').all()
+    pitch = Pitch.query.filter_by(category = 'Mood_lifting').all()
     
     return render_template('mood_lifting.html',pitches = pitch)
 
-@main.route('/social/category')
-def spiritual():
+@main.route('/social/<category>')
+def social(category):
     
-    pitch = Pitch.query.filter_by(category = 'social').all()
+    pitch = Pitch.query.filter_by(category = 'Social').all()
     
     return render_template('social.html',pitches = pitch)
 
-@main.route('/pick_up_lines/category')
-def spiritual():
+@main.route('/pick_up_lines/<category>')
+def pick_up_lines(category):
     
-    pitch = Pitch.query.filter_by(category = 'pick_up_lines').all()
+    pitch = Pitch.query.filter_by(category = 'Pick_Up_Lines').all()
     
     return render_template('pick_up_lines.html',pitches = pitch)
 
-@main.route('/motivational/category')
-def motivational():
+@main.route('/motivational/<category>')
+def motivational(category):
     
-    pitch = Pitch.query.filter_by(category = 'motivational').all()
+    pitch = Pitch.query.filter_by(category = 'Motivational').all()
     
     return render_template('motivational.html',pitches = pitch)
     
