@@ -90,4 +90,40 @@ def business():
     pitch = Pitch.query.filter_by(category = 'business').all()
     
     return render_template('business.html',pitches = pitch)
+
+@main.route('/spiritual/category')
+def spiritual():
+    
+    pitch = Pitch.query.filter_by(category = 'spiritual').all()
+    
+    return render_template('spiritual.html',pitches = pitch)
+
+@main.route('/mood_lifting/category')
+def spiritual():
+    
+    pitch = Pitch.query.filter_by(category = 'mood_lifting').all()
+    
+    return render_template('mood_lifting.html',pitches = pitch)
+
+@main.route('/social/category')
+def spiritual():
+    
+    pitch = Pitch.query.filter_by(category = 'social').all()
+    
+    return render_template('social.html',pitches = pitch)
+
+@main.route('/pick_up_lines/category')
+def spiritual():
+    
+    pitch = Pitch.query.filter_by(category = 'pick_up_lines').all()
+    
+    return render_template('pick_up_lines.html',pitches = pitch)
+
+@main.route('/motivational/category')
+def motivational():
+    
+    pitch = Pitch.query.filter_by(category = 'motivational').all()
+    
+    return render_template('motivational.html',pitches = pitch)
+    
     
