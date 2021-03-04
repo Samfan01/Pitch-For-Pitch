@@ -6,7 +6,7 @@
 {% block content %}
 <div class="container">
     <div class="col-md-8">
-        <h1>Pitches</h1>
+        <h1>Social Pitches</h1>
         {% for pitch in pitches %}
         <figure class="text-end">
             <blockquote class="blockquote">
@@ -15,9 +15,13 @@
             <figcaption class="blockquote-footer">
                 Written by: {{pitch.author}} <cite title="Source Title"> Category: {{pitch.category}}</cite>
             </figcaption>
+
+            <p>Posted at: {{pitch.posted}}</p>
         </figure>
+        <hr><hr>
         {% endfor %}
     </div>
+   
     <div class="col-md-4">
 
     </div>

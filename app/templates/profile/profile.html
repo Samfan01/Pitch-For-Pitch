@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <!-- displaying  Username-->
-        <div class="col-md-4">
+        <div class="col-md-8">
             <h3> {{user.username| capitalize}} </h3>
 
             {% if user.profile_pic_path %}
@@ -39,8 +39,9 @@
             </form>
         </div>
         {% endif %}
-        <div class="col-md-4">
-            <h1>Pitches</h1>
+    </div>
+        <div class="col-md-12">
+            <h1>My Pitches</h1>
             {% for pitch in pitches %}
             <figure class="text-end">
                 <blockquote class="blockquote">
@@ -49,10 +50,11 @@
                 <figcaption class="blockquote-footer">
                     Written by: {{pitch.author}} <cite title="Source Title"> Category: {{pitch.category}}</cite>
                 </figcaption>
+                <p>Posted at: {{pitch.posted}}</p>
             </figure>
             {% endfor %}
 
         </div>
-    </div>
+  
 </div>
 {% endblock %}

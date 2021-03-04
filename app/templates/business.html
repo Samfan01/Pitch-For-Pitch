@@ -13,7 +13,7 @@
 {% block content %}
 <div class="container">
     <div class="col-md-8">
-        <h1>Pitches</h1>
+        <h1>Business Pitches</h1>
         {% for pitch in pitches %}
         <figure class="text-end">
             <blockquote class="blockquote">
@@ -23,10 +23,14 @@
               Written by: {{pitch.author}} <cite title="Source Title"> Category: {{pitch.category}}</cite>
 
               <p>posted: {{pitch.posted}}</p>
+
+              <a href="{{url_for('main.update_profile')}}"><p>Leave Comment</p></a>
             </figcaption>
           </figure>
+          <hr><hr>
         {% endfor %}
     </div>
+    
     <div class="col-md-4">
 
     </div>
