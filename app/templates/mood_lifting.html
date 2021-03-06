@@ -17,6 +17,8 @@
             </figcaption>
 
             <p>Posted at: {{pitch.posted}}</p>
+
+            <a href="{{url_for('.comment',pitch_id = pitch.id)}}"><p>Leave Comment</p></a>
         </figure>
         <hr><hr>
         {% endfor %}

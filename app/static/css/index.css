@@ -11,12 +11,8 @@
     font-family: 'Akaya Telivigala', cursive;
 }
 .body{
-    background-image: url(../images/bg-2.jpeg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
     margin-top: -30px;
-    color: whitesmoke;
+    color: rgb(55, 55, 172);
     font-size: large;
     font-weight: bold;
 }
@@ -25,8 +21,19 @@
     font-family: 'Akaya Telivigala', cursive;
 
 }
+.homepage{
+    background-color: rgba(137, 139, 146, 0.671);
+    width: 100%;
+
+/*background-image: url(../images/bg-2.jpeg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 20px;*/
+}
 #homepage{
     height: 600px;
+    width: 100%;
 }
 #footer{
     background-color: black;

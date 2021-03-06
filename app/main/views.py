@@ -1,7 +1,7 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
 from ..models import Pitch,User,Comment
-from .forms import PitchForm,UpdateProfile
+from .forms import PitchForm,UpdateProfile,LeaveComment
 from flask_login import login_required,current_user
 from .. import db,photos
 
@@ -127,5 +127,24 @@ def motivational(category):
     pitch = Pitch.query.filter_by(category = 'Motivational').all()
     
     return render_template('motivational.html',pitches = pitch)
+
+@main.route('/comment/<int:pitch_id>',methods = ['GET','POST'])
+@login_required
+def comment(pitch_id):
+    
+    form = LeaveComment()
+    comments = Comment.query.filter_by(pitch_id = pitch_id).all()
+    
+    if form.validate_on_submit():
+        comment = form.comment.data
+        pitch_id = pitch_id
+         
+        
+        new_comment = Comment(comment = comment,pitch_id = pitch_id,user_id = current_user.id)
+        
+        new_comment.save_comment()
+        
+        return redirect(url_for('.comment',pitch_id = pitch_id))
     
     
+    return render_template('comment.html',comment_form = form,comment = comments)

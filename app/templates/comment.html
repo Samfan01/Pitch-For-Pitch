@@ -2,8 +2,23 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block content %}
-<div class="col-md-8">
-    {{wtf.quick_form(form)}}
+<div class="row">
+    <div class="col-md-8">
+        {{wtf.quick_form(comment_form)}}
+    </div>
+
 </div>
+    <h1>Previous Comments</h1>
+    {%for comment in comment %}
+    
+    <div class="col-md-12">
+       
+        <p><em>{{comment.comment}}</em></p>
+        <p><strong>{{comment.user.username}}</strong></p>
+        <hr><hr>
+    </div>
+   
+    {%  endfor %}
+    
 
 {% endblock %}
