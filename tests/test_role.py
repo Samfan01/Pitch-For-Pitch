@@ -1,13 +1,13 @@
-import unittest,TesCase
-from ..models import Role
+import unittest
+from app.models import Role
 
 
-class RoleModelTest(unittest.TesCase):
+class RoleModelTest(unittest.TestCase):
     def setUp(self):
-        self.new_role = Role(role='Admin')
+        self.new_role = Role(name='Admin')
         
-    def tearDown(self):
-        Role.delete()
+    # def tearDown(self):
+    #     Role.delete()
         
     def test_init(self):
-        self.assertEquals(self.new_role.role,'Admin')
+        self.assertEquals(self.new_role.name,'Admin')
